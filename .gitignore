@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 config.py
-docker_composer/data
+mysql_dev/data
