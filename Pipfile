@@ -10,6 +10,8 @@ flask = "*"
 flask-sqlalchemy = "*"
 pymysql = "*"
 python-dotenv = "*"
+cryptography = "*"
+gunicorn = "*"
 
 [dev-packages]
 

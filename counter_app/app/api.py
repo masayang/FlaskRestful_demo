@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from sqlalchemy import URL
 import os
+import socket
 
 
 load_dotenv()
@@ -16,6 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = URL.create(
     host=os.getenv("MYSQL_HOST"),
     database=os.getenv("MYSQL_DATABASE")
 )
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 api = Api(app)
