@@ -1,5 +1,6 @@
 #! /bin/bash
 
+docker-compose down -v
 rm requirements.txt
 rm -rf app
 pip freeze > requirements.txt
