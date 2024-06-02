@@ -1,15 +1,30 @@
 'use client';
 
-import React, { useState } from 'react'; // Import useState with type definition
+import React, { useState, useEffect } from 'react'; // Import useState with type definition
 
-interface LayoutProps {}
+interface LayoutProps { }
+
+
 
 const Layout: React.FC<LayoutProps> = () => {
   const [count, setCount] = useState<number>(0);
+console.log(process.env.NEXT_PUBLIC_COUNTER_API_URL);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(process.env.NEXT_PUBLIC_COUNTER_API_URL);
+
+      const data = await response.json();
+      setCount(data.counter);
+    }
+
+    fetchData()
+      // make sure to catch any error
+      .catch(console.error);;
+  })
 
   const handleClick = async () => {
     try {
-      const response = await fetch('http://localhost:15000/counter', {
+      const response = await fetch(process.env.REACT_APP_COUNTER_API_URL, {
         method: 'POST'
       });
 
@@ -17,13 +32,10 @@ const Layout: React.FC<LayoutProps> = () => {
         throw new Error(`API request failed with status ${response.status}`);
       }
 
-
-      const data = await response.json(); // Type for potential count property
-      console.log(data);
-      setCount(data.counter); // Update count from API or default to increment
+      const data = await response.json();
+      setCount(data.counter);
     } catch (error) {
       console.error('Error fetching data:', error);
-      // Handle errors here, like displaying an error message
     }
   };
 
@@ -45,9 +57,9 @@ const Layout: React.FC<LayoutProps> = () => {
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      
-      <Layout/>
-      
+
+      <Layout />
+
     </main>
   );
 }
